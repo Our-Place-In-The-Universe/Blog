@@ -13,6 +13,7 @@
             margin: 0;
             background-color: #010101;
             color: #eee;
+            height: 100%;
         }
         svg{
             width: 25px;
@@ -22,7 +23,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        a{
+            text-decoration: none;
+        }
+        svg{
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, rgb(193, 219, 255), rgb(100, 0, 128), rgb(255, 136, 0));
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .5s;
+        }
+        svg:hover{
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgb(100, 0, 128), rgb(255, 136, 0), rgb(193, 219, 255));
+        }
         /* Navbar styles */
         .navbar {
             position: fixed;
@@ -31,7 +46,7 @@
             width: 100%;
             background-color: #333;
             color: white;
-            z-index: 1000;
+            z-index: 21;
             padding: 10px 20px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -122,6 +137,82 @@
         .nav-links li a:hover {
             background-color: #555;
         }
+        /* css about card */
+        .cardcontainer{
+            display: none;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 114vh;
+            background-color: rgb(1, 1, 1, .7);
+            z-index: 22;
+        }
+        .cardcontainer.off{
+            filter:  blur(0px);
+            opacity: 1;
+            animation: close 1s ease-in-out forwards;
+            display: flex;
+        }
+        .cardcontainer.on{
+            filter:  blur(10px);
+            opacity: 0;
+            animation: open .7s ease-in-out forwards;
+            display: flex;
+        }
+        .cardcontainer .aboutcard{
+            padding: 10px 10px 20px;
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            transition: .5s;
+            transform: scale(1);
+        }
+        .cardcontainer .aboutcard:hover{
+            background: linear-gradient(135deg, rgb(148, 219, 255), rgb(128, 0, 128), rgb(255, 165, 0));  
+            transform: scale(1.1);     
+        }
+        .cardcontainer .aboutcard #cancel{
+            display: flex;
+            width: 100%;
+            justify-content: right;
+        }
+        @keyframes close {
+            to{
+                filter: blur(10px);
+                opacity: 0;
+                display: none;
+            }
+        }
+        @keyframes open {
+            to{
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+        /* coming soon */
+        .comingsoon{
+            display: none;
+            position: absolute;
+            top: 40vh;
+            left: 30vw;
+            padding: 21px;
+            border-radius: 10px;
+            background-color: rgb(85, 85, 85, .7);
+            z-index: 25;
+            cursor: pointer;
+        }
+        .comingsoon.off{
+            filter:  blur(0px);
+            opacity: 1;
+            animation: close .7s ease-in-out forwards;
+            display: block;
+        }
+        .comingsoon.on{
+            filter:  blur(10px);
+            opacity: 0;
+            animation: open .5s ease-in-out forwards;
+            display: block;
+        }
         /* css slider */
         .slider{
             height: 100vh;
@@ -159,7 +250,7 @@
             width: 70vw;
             max-width: 80%;
             z-index: 1;
-            max-height: 53vh;
+            max-height: 40vh;
             overflow: scroll;
             /* background-color: purple; */
         }
@@ -212,7 +303,36 @@
             position: absolute;
             top: 35%;
             right: 10%;
-            z-index: 100;
+            z-index: 15;
+        }
+        .options{
+            position: absolute;
+            z-index: 15;
+            top: 58.5%;
+            left: 15%;
+        }
+        .options ul{
+            display: flex;
+            gap: 10px;
+            list-style: none;
+        }
+        .options ul li{
+            font-size: 14px;
+            background-color: rgb(85, 85, 85, 0.5);
+            padding: 7px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .5s;
+        }
+        .options ul li a{
+            color: #eee;
+        }
+        .options ul li:hover{
+            background-color: #eee;
+            color: #010101;
+        }
+        .options ul li a:hover{
+            color: #010101;
         }
         .countdown{
             position: absolute;
@@ -307,10 +427,10 @@
 
         @media screen and (max-width: 1035px) {
             .slider{
-                top: 3vh;
+                top: 14vh;
             }
             .slider .list .item .content{
-                max-height: 56vh;
+                max-height: 40vh;
             }
             .logo{
                 font-size: 2.1vh;
@@ -374,7 +494,7 @@
                 font-size: 1.7vh;
             }
             .slider{
-                top: 7vh;
+                top: 14vh;
             }
             .thumbnail{
                 justify-content: start;
@@ -415,10 +535,10 @@
         }
         @media screen and (max-width: 728px) {
             .logo{
-                font-size: 1vw;
+                font-size: 1.5vw;
             }
             .nav-links li a{
-                font-size: .7vw;
+                font-size: 1.2vw;
             }
             .nav-links{
                 gap: 7px;
@@ -428,7 +548,7 @@
             }
             .slider .list .item .content{
                 height: fit-content;
-                max-height: 50vh;
+                max-height: 40vh;
             }
             .thumbnail .item{
                 width: 25vw;
@@ -440,7 +560,7 @@
         }
         @media screen and (max-width: 550px) {
             .slider{
-                top: 11vh;
+                top: 14vh;
             }
             .thumbnail .item{
                 width: 170px;
@@ -493,6 +613,38 @@
                 height: 240px;
             }
         }
+        @media screen and (max-width: 720px) and (max-height: 1280px){
+            .slider{
+                top: 14vh;
+            }
+            .thumbnail .item{
+                width: 180px;
+                height: 190px;
+            }
+            .thumbnail{
+                justify-content: start;
+            }
+            .logo{
+                font-size: 2vw;
+            }
+            .nav-links li a{
+                font-size: 1.7vw;
+            }
+            .nav-links{
+                gap: 7px;
+            }
+            .slider .list .item .content h2{
+                font-size: 30px;
+            }
+            .slider .list .item .content{
+                height: fit-content;
+                max-height: 40vh;
+            }
+            /* .thumbnail .item{
+                width: 25vw;
+                height: 30vh;
+            } */
+        }
    </style>
 </head>
 <body>
@@ -503,13 +655,25 @@
                 <a href="#" class="logo"><div><p>Our Place In The Universe</p></div></a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Pages</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a id="about" href="#about">About</a></li>
+                    <li><a href="./articles.html">Articles</a></li>
+                    <li><a href="./extra sources.html">Extra sources</a></li>
                 </ul>
             </div>
         </nav>
     </header>
+
+    <!-- about card -->
+    <div class="cardcontainer">
+        <div class="aboutcard">
+            <div id="cancel"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 128 128">
+                <path d="M 64 6 C 48.5 6 33.9 12 23 23 C 12 33.9 6 48.5 6 64 C 6 79.5 12 94.1 23 105 C 34 116 48.5 122 64 122 C 79.5 122 94.1 116 105 105 C 116 94 122 79.5 122 64 C 122 48.5 116 33.9 105 23 C 94.1 12 79.5 6 64 6 z M 64 12 C 77.9 12 90.900781 17.399219 100.80078 27.199219 C 110.70078 36.999219 116 50.1 116 64 C 116 77.9 110.60078 90.900781 100.80078 100.80078 C 90.900781 110.60078 77.9 116 64 116 C 50.1 116 37.099219 110.60078 27.199219 100.80078 C 17.299219 91.000781 12 77.9 12 64 C 12 50.1 17.399219 37.099219 27.199219 27.199219 C 36.999219 17.299219 50.1 12 64 12 z M 50.5625 47.5 C 49.8 47.5 49.05 47.800391 48.5 48.400391 C 47.3 49.600391 47.3 51.499609 48.5 52.599609 L 59.800781 64 L 48.400391 75.300781 C 47.200391 76.500781 47.200391 78.4 48.400391 79.5 C 49.000391 80.1 49.8 80.400391 50.5 80.400391 C 51.2 80.400391 51.999609 80.1 52.599609 79.5 L 64 68.199219 L 75.300781 79.5 C 75.900781 80.1 76.700391 80.400391 77.400391 80.400391 C 78.100391 80.400391 78.9 80.1 79.5 79.5 C 80.7 78.3 80.7 76.400781 79.5 75.300781 L 68.199219 64 L 79.5 52.699219 C 80.7 51.499219 80.699609 49.600391 79.599609 48.400391 C 78.399609 47.200391 76.500391 47.200391 75.400391 48.400391 L 64 59.800781 L 52.699219 48.400391 C 52.099219 47.800391 51.325 47.5 50.5625 47.5 z"></path>
+            </svg></div>
+            <h1>Our Place In The Universe</h1>
+            <small>To enlighten us on our place in the universe</small><br>
+            <b>@Our Place In The Universe2024</b>
+        </div>
+    </div>
 
     <!-- slider -->
     <div id="home"></div>
@@ -539,7 +703,7 @@
             <div class="item">
                 <div><img src="./smiling-cute-girl-3840x2160-19809(large).webp" alt=""></div>
                 <div class="content">
-                    <p>Existense</p>
+                    <p>Existence</p>
                     <h2>Efficient Living</h2>
                     <p>
                         Join me on this expedition as we unravel life’s hidden patterns, explore success symmetries, and uncover transformative adjustments that leads to efficient living.
@@ -562,6 +726,16 @@
             <button id="playpause">o</button>
             <button id="next">></button>
         </div>
+        <div class="comingsoon" id="comso">
+            <h1>Coming soon...</h1>
+        </div>
+        <div class="options">
+            <ul>
+                <li id="articles"> <a href="./articles.html">Articles</a></li>
+                <li id="classify"> <a href="#">Classifications</a></li>
+                <li id="extra"> <a href="./extra sources.html">Extra sources</a></li>
+            </ul>
+        </div>
     </div>
 
     <!-- thumbnail -->
@@ -581,7 +755,7 @@
         <div class="item">
             <img src="./smiling-cute-girl-3840x2160-19809(large).webp">
             <div class="content">
-                Existense
+                Existence
             </div>
         </div>
      </div>
@@ -592,6 +766,11 @@
         let prev = document.getElementById('prev');
         let playpause= document.getElementById('playpause');
         let thumbnails = document.querySelectorAll('.thumbnail .item');
+        let aboutbtn = document.getElementById("about");
+        let cancelbtn = document.getElementById("cancel");
+        let card = document.querySelector(".cardcontainer");
+        let comso = document.querySelector(".comingsoon");
+        let classbtn = document.getElementById("classify")
 
         //config param
         let countItem = items.length;
@@ -658,39 +837,75 @@
             }
         }
 
-        // countdown timer
+        // about card
 
+        aboutbtn.onclick = function(){
+
+                card.classList.toggle("off");
+                card.classList.add("on");
+
+        }
+        cancelbtn.onclick = function(){
+
+                card.classList.remove("on");
+                card.classList.add("off");
+
+        }
+
+        // classification
+        classbtn.onclick = function(){
+
+            comso.classList.toggle("off");
+            comso.classList.add("on");
+
+        }
+        classbtn.onclick = function(){
+
+            comso.classList.toggle("on");
+            comso.classList.add("off");
+
+        }
+        comso.onclick = function(){
+
+            comso.classList.toggle("on");
+            comso.classList.add("off");
+
+        }
+
+        // countdown timer
+document.querySelector(".countdown").style.display = "none"
 //---------------------------------------
 
-        function countdownTo(targetTime) {
-            // Get the target time in milliseconds
-            const targetDate = new Date(targetTime).getTime();
+        // function countdownTo(targetTime) {
+        //     // Get the target time in milliseconds
+        //     const targetDate = new Date(targetTime).getTime();
 
-            // Update the countdown every second
-            const interval = setInterval(function() {
-                // Get current time
-                const now = new Date().getTime();
+        //     // Update the countdown every second
+        //     const interval = setInterval(function() {
+        //         // Get current time
+        //         const now = new Date().getTime();
 
-                // Find the difference between now and the target time
-                const timeLeft = targetDate - now;
+        //         // Find the difference between now and the target time
+        //         const timeLeft = targetDate - now;
 
-                // Calculate days, hours, minutes, and seconds
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        //         // Calculate days, hours, minutes, and seconds
+        //         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        //         const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        //         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                // Display the result
-                document.getElementById("countdown").innerHTML = 
-                    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        //         // Display the result
+        //         document.getElementById("countdown").innerHTML = 
+        //             days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-                // If the countdown is finished, stop the timer
-                if (timeLeft < 0) {
-                    clearInterval(interval);
-                    document.getElementById("countdown").innerHTML = "Now Open";
-                }
-            }, 1000);
-        }
+        //         // If the countdown is finished, stop the timer
+        //         if (timeLeft < 0) {
+        //             clearInterval(interval);
+        //             document.getElementById("countdown").innerHTML = "Now Open";
+        //             // document.querySelector(".countdown").style.display = "none"
+        //         }
+        //     }, 1000);
+        // }
 
 
 //----------------------------------
